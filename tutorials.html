@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TheRohanTech - Tutorials</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+      color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      padding: 2rem;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .floating-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .shape {
+      position: absolute;
+      opacity: 0.1;
+      animation: float 20s infinite linear;
+    }
+
+    .shape:nth-child(1) {
+      top: 20%;
+      left: 10%;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(45deg, #00ffd5, #0080ff);
+      border-radius: 50%;
+      animation-delay: 0s;
+    }
+
+    .shape:nth-child(2) {
+      top: 60%;
+      left: 80%;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+      border-radius: 20%;
+      animation-delay: -5s;
+    }
+
+    .shape:nth-child(3) {
+      top: 80%;
+      left: 20%;
+      width: 100px;
+      height: 40px;
+      background: linear-gradient(45deg, #00ffd5, #ff6b6b);
+      border-radius: 50px;
+      animation-delay: -10s;
+    }
+
+    .shape:nth-child(4) {
+      top: 10%;
+      left: 70%;
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(45deg, #0080ff, #00ffd5);
+      border-radius: 30%;
+      animation-delay: -15s;
+    }
+
+    .shape:nth-child(5) {
+      top: 40%;
+      left: 5%;
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(45deg, #ffd93d, #00ffd5);
+      border-radius: 50%;
+      animation-delay: -7s;
+    }
+
+    /* Particle effect */
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #00ffd5;
+      border-radius: 50%;
+      animation: twinkle 3s infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+      }
+      100% {
+        transform: translateY(0px) rotate(360deg);
+      }
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(0,255,213,0.3);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(0,255,213,0.6);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      color: #00ffd5;
+      text-shadow: 0 0 20px rgba(0,255,213,0.5);
+      margin-bottom: 1rem;
+      animation: pulse 2s infinite;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      text-align: center;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .nav-bar {
+      margin-bottom: 2rem;
+      animation: slideInLeft 0.8s ease-out 0.2s both;
+    }
+
+    .nav-bar a {
+      color: #00ffd5;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border: 1px solid #00ffd5;
+      border-radius: 15px;
+      display: inline-block;
+      transition: all 0.3s ease;
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+      margin-right: 1rem;
+    }
+
+    .nav-bar a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: #00ffd5;
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+
+    .nav-bar a:hover::before {
+      left: 0;
+    }
+
+    .nav-bar a:hover {
+      color: #111;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,255,213,0.4);
+    }
+
+    .tutorials-container {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .tutorial-section {
+      background: rgba(26, 26, 26, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 2.5rem;
+      border-radius: 25px;
+      box-shadow: 0 8px 32px rgba(0,255,213,0.1);
+      border: 1px solid rgba(0,255,213,0.2);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .tutorial-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,255,213,0.05), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .tutorial-section:hover::before {
+      left: 100%;
+    }
+
+    .tutorial-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,255,213,0.2);
+    }
+
+    .tutorial-section:nth-child(1) {
+      animation: slideInLeft 0.8s ease-out 0.4s both;
+    }
+
+    .tutorial-section:nth-child(2) {
+      animation: slideInRight 0.8s ease-out 0.6s both;
+    }
+
+    .tutorial-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .tutorial-header h2 {
+      font-size: 2.5rem;
+      color: #00ffd5;
+      text-shadow: 0 0 15px rgba(0,255,213,0.4);
+    }
+
+    .tutorial-header .icon {
+      font-size: 3rem;
+      opacity: 0.8;
+    }
+
+    .tutorial-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .tutorial-text {
+      line-height: 1.8;
+      opacity: 0.9;
+    }
+
+    .tutorial-text h3 {
+      color: #00ffd5;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .tutorial-text p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .tutorial-text ul {
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tutorial-text li {
+      margin-bottom: 0.8rem;
+      color: #ccc;
+    }
+
+    .code-block {
+      background: rgba(10, 10, 10, 0.8);
+      border: 1px solid rgba(0,255,213,0.3);
+      border-radius: 15px;
+      padding: 1.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .code-block::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #00ffd5, #0080ff);
+      border-radius: 15px 15px 0 0;
+    }
+
+    .code-block pre {
+      margin: 0;
+      color: #f4f4f4;
+      line-height: 1.4;
+    }
+
+    .code-block .comment {
+      color: #888;
+    }
+
+    .code-block .keyword {
+      color: #00ffd5;
+      font-weight: bold;
+    }
+
+    .code-block .string {
+      color: #ffd93d;
+    }
+
+    .code-block .number {
+      color: #ff6b6b;
+    }
+
+    .tutorial-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+
+    .btn {
+      color: #00ffd5;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.8rem 1.5rem;
+      border: 2px solid #00ffd5;
+      border-radius: 25px;
+      display: inline-block;
+      transition: all 0.3s ease;
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: #00ffd5;
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+
+    .btn:hover::before {
+      left: 0;
+    }
+
+    .btn:hover {
+      color: #111;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,255,213,0.4);
+    }
+
+    .btn-secondary {
+      border-color: #0080ff;
+      color: #0080ff;
+    }
+
+    .btn-secondary::before {
+      background: #0080ff;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      header p {
+        font-size: 1.1rem;
+      }
+      
+      .tutorial-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .tutorial-header h2 {
+        font-size: 2rem;
+      }
+      
+      .tutorial-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .nav-bar a {
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation">
+    <div class="floating-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+    <div class="particles" id="particles"></div>
+  </div>
+
+  <header>
+    <h1>Tech Tutorials</h1>
+    <p>Master the fundamentals of programming and hardware.<br>Your journey to innovation starts here.</p>
+  </header>
+
+  <div class="nav-bar">
+    <a href="index.html">← Back to Home</a>
+  </div>
+
+  <div class="tutorials-container">
+    <div class="tutorial-section">
+      <div class="tutorial-header">
+        <div class="icon">🐍</div>
+        <h2>Python Basics</h2>
+      </div>
+      
+      <div class="tutorial-content">
+        <div class="tutorial-text">
+          <h3>Getting Started with Python</h3>
+          <p>Python is a powerful, versatile programming language perfect for beginners and professionals alike. Its simple syntax and extensive libraries make it ideal for everything from web development to AI.</p>
+          
+          <h3>What You'll Learn:</h3>
+          <ul>
+            <li>Variables and data types</li>
+            <li>Control structures (if/else, loops)</li>
+            <li>Functions and modules</li>
+            <li>File handling and error management</li>
+            <li>Object-oriented programming basics</li>
+          </ul>
+          
+          <h3>Prerequisites:</h3>
+          <p>No prior programming experience required! Just enthusiasm to learn and a computer with Python installed.</p>
+        </div>
+        
+        <div class="code-block">
+          <pre><code><span class="comment"># Python Hello World Example</span>
+<span class="keyword">def</span> <span class="keyword">greet</span>(name):
+    <span class="string">"Function to greet a person"</span>
+    <span class="keyword">return</span> <span class="string">f"Hello, {name}! Welcome to Python!"</span>
+
+<span class="comment"># Variables and data types</span>
+user_name = <span class="string">"Coder"</span>
+age = <span class="number">25</span>
+is_learning = <span class="keyword">True</span>
+
+<span class="comment"># Control structures</span>
+<span class="keyword">if</span> is_learning:
+    <span class="keyword">print</span>(greet(user_name))
+    <span class="keyword">print</span>(<span class="string">f"Age: {age}"</span>)
+    
+<span class="comment"># Loop example</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):
+    <span class="keyword">print</span>(<span class="string">f"Learning step {i+1}"</span>)</code></pre>
+        </div>
+      </div>
+      
+      <div class="tutorial-buttons">
+        <a href="#" class="btn">Start Python Course</a>
+        <a href="#" class="btn btn-secondary">Download Resources</a>
+      </div>
+    </div>
+
+    <div class="tutorial-section">
+      <div class="tutorial-header">
+        <div class="icon">🔧</div>
+        <h2>Arduino Basics</h2>
+      </div>
+      
+      <div class="tutorial-content">
+        <div class="tutorial-text">
+          <h3>Hardware Programming Made Simple</h3>
+          <p>Arduino is an open-source electronics platform that makes it easy to create interactive projects. Perfect for robotics, IoT devices, and bringing your digital ideas into the physical world.</p>
+          
+          <h3>What You'll Learn:</h3>
+          <ul>
+            <li>Arduino IDE setup and usage</li>
+            <li>Digital and analog input/output</li>
+            <li>Sensor integration and data reading</li>
+            <li>Motor control and servo manipulation</li>
+            <li>WiFi connectivity and IoT basics</li>
+          </ul>
+          
+          <h3>Hardware Needed:</h3>
+          <p>Arduino Uno board, breadboard, jumper wires, LED, resistors, and various sensors. Complete starter kits are available online.</p>
+        </div>
+        
+        <div class="code-block">
+          <pre><code><span class="comment">// Arduino LED Blink with Sensor</span>
+<span class="keyword">int</span> ledPin = <span class="number">13</span>;
+<span class="keyword">int</span> sensorPin = <span class="number">A0</span>;
+<span class="keyword">int</span> sensorValue = <span class="number">0</span>;
+
+<span class="keyword">void</span> <span class="keyword">setup</span>() {
+  <span class="comment">// Initialize pins and serial communication</span>
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(<span class="number">9600</span>);
+}
+
+<span class="keyword">void</span> <span class="keyword">loop</span>() {
+  <span class="comment">// Read sensor value</span>
+  sensorValue = analogRead(sensorPin);
+  Serial.print(<span class="string">"Sensor: "</span>);
+  Serial.println(sensorValue);
+  
+  <span class="comment">// Control LED based on sensor</span>
+  <span class="keyword">if</span> (sensorValue > <span class="number">500</span>) {
+    digitalWrite(ledPin, HIGH);
+  } <span class="keyword">else</span> {
+    digitalWrite(ledPin, LOW);
+  }
+  
+  delay(<span class="number">1000</span>);
+}</code></pre>
+        </div>
+      </div>
+      
+      <div class="tutorial-buttons">
+        <a href="#" class="btn">Start Arduino Course</a>
+        <a href="#" class="btn btn-secondary">Wiring Diagrams</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Create random particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 3 + 's';
+        particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Mouse movement effect
+    document.addEventListener('mousemove', (e) => {
+      const shapes = document.querySelectorAll('.shape');
+      const mouseX = e.clientX / window.innerWidth;
+      const mouseY = e.clientY / window.innerHeight;
+      
+      shapes.forEach((shape, index) => {
+        const speed = (index + 1) * 0.02;
+        const x = (mouseX - 0.5) * speed * 50;
+        const y = (mouseY - 0.5) * speed * 50;
+        shape.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    });
+
+    // Initialize particles when page loads
+    window.addEventListener('load', createParticles);
+
+    // Add scroll animations
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('.tutorial-section');
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        
+        if (isVisible) {
+          section.style.opacity = '1';
+          section.style.transform = 'translateY(0)';
+        }
+      });
+    });
+
+    // Add syntax highlighting effect
+    function highlightSyntax() {
+      const codeBlocks = document.querySelectorAll('.code-block pre code');
+      codeBlocks.forEach(block => {
+        block.addEventListener('mouseenter', () => {
+          block.style.background = 'rgba(0,255,213,0.05)';
+          block.style.transition = 'background 0.3s ease';
+        });
+        
+        block.addEventListener('mouseleave', () => {
+          block.style.background = 'transparent';
+        });
+      });
+    }
+
+    // Initialize syntax highlighting
+    window.addEventListener('load', highlightSyntax);
+  </script>
+</body>
+</html>
