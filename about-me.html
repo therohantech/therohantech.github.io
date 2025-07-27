@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me | TheRohanTech</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+      color: #f4f4f4;
+      padding: 2rem;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .floating-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .shape {
+      position: absolute;
+      opacity: 0.08;
+      animation: float 25s infinite linear;
+    }
+
+    .shape:nth-child(1) {
+      top: 10%;
+      left: 15%;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(45deg, #00ffd5, #0080ff);
+      border-radius: 50%;
+      animation-delay: 0s;
+    }
+
+    .shape:nth-child(2) {
+      top: 70%;
+      left: 85%;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+      border-radius: 20%;
+      animation-delay: -8s;
+    }
+
+    .shape:nth-child(3) {
+      top: 30%;
+      left: 75%;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, #00ffd5, #ff6b6b);
+      border-radius: 30%;
+      animation-delay: -15s;
+    }
+
+    .shape:nth-child(4) {
+      top: 50%;
+      left: 5%;
+      width: 120px;
+      height: 50px;
+      background: linear-gradient(45deg, #0080ff, #00ffd5);
+      border-radius: 25px;
+      animation-delay: -20s;
+    }
+
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #00ffd5;
+      border-radius: 50%;
+      animation: twinkle 4s infinite;
+    }
+
+    .code-rain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .code-line {
+      position: absolute;
+      color: #00ffd5;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      opacity: 0.1;
+      animation: fall 10s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-30px) rotate(180deg);
+      }
+      100% {
+        transform: translateY(0px) rotate(360deg);
+      }
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.15;
+      }
+      90% {
+        opacity: 0.15;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes typewriter {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    /* Navigation */
+    .nav-back {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      z-index: 1000;
+      background: rgba(26, 26, 26, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0,255,213,0.3);
+      border-radius: 25px;
+      padding: 0.8rem 1.5rem;
+      color: #00ffd5;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      animation: slideInLeft 0.8s ease-out;
+    }
+
+    .nav-back:hover {
+      background: rgba(0,255,213,0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,255,213,0.3);
+    }
+
+    /* Terminal Window */
+    .terminal {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(26, 26, 26, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0,255,213,0.2);
+      border-radius: 20px;
+      overflow: hidden;
+      animation: fadeInUp 1s ease-out;
+      box-shadow: 0 8px 32px rgba(0,255,213,0.1);
+    }
+
+    .terminal-header {
+      background: rgba(0,255,213,0.1);
+      padding: 1rem;
+      border-bottom: 1px solid rgba(0,255,213,0.2);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .terminal-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .terminal-button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #00ffd5;
+    }
+
+    .terminal-title {
+      font-family: 'Segoe UI', sans-serif;
+      color: #00ffd5;
+      font-size: 0.9rem;
+    }
+
+    .terminal-content {
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    .prompt {
+      color: #00ffd5;
+      font-weight: bold;
+    }
+
+    .prompt::after {
+      content: '';
+    }
+
+    h1 {
+      color: #00ffd5;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 20px rgba(0,255,213,0.5);
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    .typed-text {
+      overflow: hidden;
+      border-right: 2px solid #00ffd5;
+      white-space: nowrap;
+      animation: typewriter 3s steps(40) 1s both, blink 1s step-end infinite;
+    }
+
+    .section {
+      margin: 3rem 0;
+      padding: 1.5rem;
+      border: 1px solid rgba(0,255,213,0.2);
+      background: rgba(0,255,213,0.05);
+      border-radius: 15px;
+      animation: fadeInUp 0.8s ease-out both;
+    }
+
+    .section h2 {
+      color: #00ffd5;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .section h3 {
+      color: #00ffd5;
+      font-size: 1.2rem;
+      margin: 1rem 0 0.5rem 0;
+    }
+
+    .section p, .section li {
+      margin-bottom: 0.5rem;
+      color: #f4f4f4;
+    }
+
+    .section ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+
+    .section li::before {
+      content: '•';
+      color: #00ffd5;
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+
+    .achievement {
+      background: rgba(0,255,213,0.1);
+      border-left: 4px solid #00ffd5;
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1rem 0;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .achievement:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,255,213,0.2);
+    }
+
+    .achievement::after {
+      content: '🏆';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.2rem;
+    }
+
+    .achievement.third::after {
+      content: '🥉';
+    }
+
+    .achievement.participant::after {
+      content: '🎯';
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: rgba(26, 26, 26, 0.8);
+      border: 1px solid rgba(0,255,213,0.3);
+      border-radius: 15px;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,255,213,0.2);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #00ffd5;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .contact-item {
+      color: #00ffd5;
+    }
+
+    .contact-item::before {
+      content: '';
+      font-weight: bold;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .skill-tag {
+      background: rgba(0,255,213,0.1);
+      border: 1px solid rgba(0,255,213,0.3);
+      border-radius: 20px;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+    }
+
+    .skill-tag:hover {
+      background: rgba(0,255,213,0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      
+      .nav-back {
+        top: 1rem;
+        left: 1rem;
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .terminal-content {
+        padding: 1rem;
+      }
+      
+      .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+      
+      .contact-info {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation">
+    <div class="floating-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+    <div class="particles" id="particles"></div>
+    <div class="code-rain" id="codeRain"></div>
+  </div>
+
+  <a href="index.html" class="nav-back">Back to Home</a>
+
+  <div class="terminal">
+    <div class="terminal-header">
+      <div class="terminal-buttons">
+        <div class="terminal-button"></div>
+        <div class="terminal-button"></div>
+        <div class="terminal-button"></div>
+      </div>
+      <div class="terminal-title">About - TheRohanTech</div>
+    </div>
+    
+    <div class="terminal-content">
+      <div class="prompt"></div>
+      <h1 class="typed-text">ROHAN ASHAR</h1>
+      <p style="font-size: 1.2rem; margin-bottom: 2rem;">ASPIRING ELECTRICAL & ROBOTICS ENGINEER</p>
+
+      <div class="section">
+        <h2>System Information</h2>
+        <p><strong>Name:</strong> Rohan Ashar</p>
+        <p><strong>Status:</strong> Y3 Undergraduate - B.Sc Electrical Engineering with Robotics</p>
+        <p><strong>Institution:</strong> Rochester Institute of Technology, Dubai</p>
+        <p><strong>Location:</strong> Dubai, UAE</p>
+        <p><strong>Specialization:</strong> Robotics, AI, Computer Vision, Embedded Systems</p>
+      </div>
+
+      <div class="section">
+        <h2>Mission Statement</h2>
+        <p>An aspiring Electrical Engineer with a deep passion for Robotics, AI and Computer Vision, Circuitry, Wireless communications systems and Embedded System Design. I intend to pursue a career as an Electrical Engineer with special focus in Electronics, Mechatronics, Robotics and Task Automation.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">15+</div>
+          <div>Major Competitions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5</div>
+          <div>First Place Wins</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">3</div>
+          <div>Years Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">20+</div>
+          <div>Active Projects</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Major Achievements</h2>
+        
+        <div class="achievement">
+          <h3>Winner - Falcon Monitoring Challenge</h3>
+          <p><strong>IROS 2024, ADNEC Abu Dhabi (Oct 2024)</strong></p>
+          <p>Developed advanced software solution for tracking falcons in open environments using computer vision and AI algorithms.</p>
+        </div>
+
+        <div class="achievement">
+          <h3>Winner - Emirates Robotics Competition</h3>
+          <p><strong>Khalifa University, Abu Dhabi (Feb 2024)</strong></p>
+          <p>Created autonomous mobile trash collection robot 'ECOBOT' capable of navigating park environments and disposing collected items.</p>
+        </div>
+
+        <div class="achievement third">
+          <h3>3rd Place - A2RL STEM Challenge</h3>
+          <p><strong>Yas Marina Circuit, Abu Dhabi (April 2024)</strong></p>
+          <p>Developed control systems for fully autonomous high-speed race car competing against international student teams.</p>
+        </div>
+
+        <div class="achievement third">
+          <h3>3rd Place - YAS 4x4 Challenge</h3>
+          <p><strong>Yas Marina Circuit, Abu Dhabi (June 2023)</strong></p>
+          <p>Designed and built RC crawler with advanced electronics, custom PCB design, and live telemetry systems.</p>
+        </div>
+
+        <div class="achievement">
+          <h3>Winner - University of Wollongong AI Competition</h3>
+          <p><strong>Dubai (May 2022)</strong></p>
+          <p>First place in robotics and AI competition demonstrating innovative solutions in autonomous systems.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Leadership & Experience</h2>
+        <ul>
+          <li><strong>Team Lead:</strong> RIT Team 'SweepKeep' - Hardware, Software & Construction (Dec 2024-Present)</li>
+          <li><strong>Project Leader:</strong> AI & Robotics Club - Aerial Robotics (Sep 2024-Present)</li>
+          <li><strong>Inventory & Procurement Manager:</strong> AI & Robotics Club (July 2023-Present)</li>
+          <li><strong>Lab Support Assistant:</strong> Supporting EE Labs (Sep 2023-Present)</li>
+          <li><strong>Formula SAE:</strong> Electrical Systems Engineer (2024)</li>
+          <li><strong>Workshop Tutor:</strong> DIA Robotics Workshop - Mentoring young minds</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Technical Arsenal</h2>
+        <h3>Programming Languages</h3>
+        <div class="skills-list">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C/C++</span>
+          <span class="skill-tag">HTML</span>
+          <span class="skill-tag">MySQL</span>
+        </div>
+
+        <h3>Software & Tools</h3>
+        <div class="skills-list">
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">ROS</span>
+          <span class="skill-tag">MATLAB</span>
+          <span class="skill-tag">Altium</span>
+          <span class="skill-tag">Fusion 360</span>
+          <span class="skill-tag">Blender</span>
+          <span class="skill-tag">Arduino IDE</span>
+          <span class="skill-tag">Git</span>
+        </div>
+
+        <h3>Hardware Expertise</h3>
+        <div class="skills-list">
+          <span class="skill-tag">Robotics</span>
+          <span class="skill-tag">Arduino</span>
+          <span class="skill-tag">Raspberry Pi</span>
+          <span class="skill-tag">PCB Design</span>
+          <span class="skill-tag">3D Printing</span>
+          <span class="skill-tag">Soldering</span>
+          <span class="skill-tag">Circuit Design</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Current Projects</h2>
+        <ul>
+          <li><strong>SnackBot Pro:</strong> Multi-Function Robotic Beverage + Snack Server (Imagine RIT Festival NY, USA - April 2025)</li>
+          <li><strong>Hexapod Surveillance Robot:</strong> Advanced 6-legged robot with computer vision capabilities</li>
+          <li><strong>Smart AR Glasses:</strong> Heads-up display with context-aware AI assistant</li>
+          <li><strong>Autonomous RC Racing:</strong> Race line optimization and control systems</li>
+          <li><strong>Smart Lab:</strong> IoT-enabled lab with real-time monitoring and automation</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Certifications & Training</h2>
+        <ul>
+          <li>5-day ROS Workshop - Dubai Future Labs (Feb 2024)</li>
+          <li>Space Science & Technology - IIRS-ISRO (2022)</li>
+          <li>Remote Sensing & GIS - IIRS-ISRO (2021)</li>
+          <li>Aviation & Avionics Workshop - VCATI (2020)</li>
+          <li>Multiple Engineering Workshops - Heriot-Watt University (2021)</li>
+          <li>IEEE Member & IEEE RAS Member (2025)</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Contact Information</h2>
+        <div class="contact-info">
+          <div class="contact-item">therohanashar.10@gmail.com</div>
+          <div class="contact-item">+971-56-7363432</div>
+          <div class="contact-item">linkedin.com/in/rohan-ashar</div>
+          <div class="contact-item">Dubai, UAE</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Acknowledgments</h2>
+        <p>Special thanks to my mentors: Dr. Amer, Dr. Jinane, Dr. Abhilasha</p>
+        <p>Grateful to RIT Dubai and AIRC members for their continued support</p>
+        <p>Looking forward to continued innovation & achievements in the field of robotics and electrical engineering!</p>
+      </div>
+
+      <div class="prompt"></div>
+      <p style="color: #00ffd5;">Ready for next innovation...</p>
+    </div>
+  </div>
+
+  <script>
+    // Create random particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 60;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 4 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Create code rain effect
+    function createCodeRain() {
+      const codeRainContainer = document.getElementById('codeRain');
+      const codeSymbols = ['01', '10', '11', '00', '{', '}', '<', '>', '/', '\\', '|', '-', '+', '=', '~', '#'];
+      
+      for (let i = 0; i < 15; i++) {
+        const codeLine = document.createElement('div');
+        codeLine.className = 'code-line';
+        codeLine.textContent = codeSymbols[Math.floor(Math.random() * codeSymbols.length)];
+        codeLine.style.left = Math.random() * 100 + '%';
+        codeLine.style.animationDelay = Math.random() * 10 + 's';
+        codeLine.style.animationDuration = (Math.random() * 5 + 8) + 's';
+        codeRainContainer.appendChild(codeLine);
+      }
+    }
+
+    // Mouse movement effect
+    document.addEventListener('mousemove', (e) => {
+      const shapes = document.querySelectorAll('.shape');
+      const mouseX = e.clientX / window.innerWidth;
+      const mouseY = e.clientY / window.innerHeight;
+      
+      shapes.forEach((shape, index) => {
+        const speed = (index + 1) * 0.01;
+        const x = (mouseX - 0.5) * speed * 30;
+        const y = (mouseY - 0.5) * speed * 30;
+        shape.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    });
+
+    // Scroll animations
+    function animateOnScroll() {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        
+        if (isVisible) {
+          section.style.animationDelay = `${index * 0.1}s`;
+        }
+      });
+    }
+
+    // Initialize effects
+    window.addEventListener('load', () => {
+      createParticles();
+      createCodeRain();
+    });
+
+    window.addEventListener('scroll', animateOnScroll);
+
+    // Refresh code rain periodically
+    setInterval(() => {
+      const codeRain = document.getElementById('codeRain');
+      codeRain.innerHTML = '';
+      createCodeRain();
+    }, 30000);
+  </script>
+</body>
+</html>
