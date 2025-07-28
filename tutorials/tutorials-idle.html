@@ -497,35 +497,124 @@
   </div>
 
   <header>
-    <h1>Tutorials</h1>
+    <h1>Tech Tutorials</h1>
     <p>Master the fundamentals of programming and hardware.<br>Your journey to innovation starts here.</p>
   </header>
 
   <div class="nav-bar">
-    <a href="index.html">← Back to Home</a>
+    <a href="/index.html">← Back to Home</a>
   </div>
 
   <div class="tutorials-container">
     <div class="tutorial-section">
       <div class="tutorial-header">
-        <div class="icon">💻</div>
-        <h2>Programming Basics</h2>
+        <div class="icon">🐍</div>
+        <h2>Python Basics</h2>
       </div>
+      
+      <div class="tutorial-content">
+        <div class="tutorial-text">
+          <h3>Getting Started with Python</h3>
+          <p>Python is a powerful, versatile programming language perfect for beginners and professionals alike. Its simple syntax and extensive libraries make it ideal for everything from web development to AI.</p>
+          
+          <h3>What You'll Learn:</h3>
+          <ul>
+            <li>Variables and data types</li>
+            <li>Control structures (if/else, loops)</li>
+            <li>Functions and modules</li>
+            <li>File handling and error management</li>
+            <li>Object-oriented programming basics</li>
+          </ul>
+          
+          <h3>Prerequisites:</h3>
+          <p>No prior programming experience required! Just enthusiasm to learn and a computer with Python installed.</p>
+        </div>
+        
+        <div class="code-block">
+          <pre><code><span class="comment"># Python Hello World Example</span>
+<span class="keyword">def</span> <span class="keyword">greet</span>(name):
+    <span class="string">"Function to greet a person"</span>
+    <span class="keyword">return</span> <span class="string">f"Hello, {name}! Welcome to Python!"</span>
+
+<span class="comment"># Variables and data types</span>
+user_name = <span class="string">"Coder"</span>
+age = <span class="number">25</span>
+is_learning = <span class="keyword">True</span>
+
+<span class="comment"># Control structures</span>
+<span class="keyword">if</span> is_learning:
+    <span class="keyword">print</span>(greet(user_name))
+    <span class="keyword">print</span>(<span class="string">f"Age: {age}"</span>)
+    
+<span class="comment"># Loop example</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):
+    <span class="keyword">print</span>(<span class="string">f"Learning step {i+1}"</span>)</code></pre>
+        </div>
+      </div>
+      
       <div class="tutorial-buttons">
-        <a href="tutorials/tutorials-idle.html" class="btn">Learn</a>
+        <a href="#" class="btn">Start Python Course</a>
+        <a href="#" class="btn btn-secondary">Download Resources</a>
       </div>
     </div>
 
     <div class="tutorial-section">
       <div class="tutorial-header">
         <div class="icon">🔧</div>
-        <h2>Linux</h2>
+        <h2>Arduino Basics</h2>
+      </div>
+      
+      <div class="tutorial-content">
+        <div class="tutorial-text">
+          <h3>Hardware Programming Made Simple</h3>
+          <p>Arduino is an open-source electronics platform that makes it easy to create interactive projects. Perfect for robotics, IoT devices, and bringing your digital ideas into the physical world.</p>
+          
+          <h3>What You'll Learn:</h3>
+          <ul>
+            <li>Arduino IDE setup and usage</li>
+            <li>Digital and analog input/output</li>
+            <li>Sensor integration and data reading</li>
+            <li>Motor control and servo manipulation</li>
+            <li>WiFi connectivity and IoT basics</li>
+          </ul>
+          
+          <h3>Hardware Needed:</h3>
+          <p>Arduino Uno board, breadboard, jumper wires, LED, resistors, and various sensors. Complete starter kits are available online.</p>
+        </div>
+        
+        <div class="code-block">
+          <pre><code><span class="comment">// Arduino LED Blink with Sensor</span>
+<span class="keyword">int</span> ledPin = <span class="number">13</span>;
+<span class="keyword">int</span> sensorPin = <span class="number">A0</span>;
+<span class="keyword">int</span> sensorValue = <span class="number">0</span>;
+
+<span class="keyword">void</span> <span class="keyword">setup</span>() {
+  <span class="comment">// Initialize pins and serial communication</span>
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(<span class="number">9600</span>);
+}
+
+<span class="keyword">void</span> <span class="keyword">loop</span>() {
+  <span class="comment">// Read sensor value</span>
+  sensorValue = analogRead(sensorPin);
+  Serial.print(<span class="string">"Sensor: "</span>);
+  Serial.println(sensorValue);
+  
+  <span class="comment">// Control LED based on sensor</span>
+  <span class="keyword">if</span> (sensorValue > <span class="number">500</span>) {
+    digitalWrite(ledPin, HIGH);
+  } <span class="keyword">else</span> {
+    digitalWrite(ledPin, LOW);
+  }
+  
+  delay(<span class="number">1000</span>);
+}</code></pre>
+        </div>
+      </div>
+      
       <div class="tutorial-buttons">
-        <a href="tutorials/tutorials-ubuntuinstall.html" class="btn">Setup Ubuntu</a>
-        <a href="tutorials/tutorials-ubuntuinstall.html" class="btn">Setup Raspberry Pi</a>
-        <a href="tutorials/tutorials-ubuntuinstall.html" class="btn">Setup Esp 32/8266</a>
-
-
+        <a href="#" class="btn">Start Arduino Course</a>
+        <a href="#" class="btn btn-secondary">Wiring Diagrams</a>
       </div>
     </div>
   </div>
